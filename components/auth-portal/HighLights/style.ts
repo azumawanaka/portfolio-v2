@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-import { Box } from '@mui/material';
+import { List } from '@mui/material';
 
-export const AuthHighLightsStyle = styled(Box)(({ theme }) => ({
+export const AuthHighLightsStyle = styled(List)(({ theme }) => ({
   '& li': {
     alignItems: 'start',
     paddingLeft: 0,

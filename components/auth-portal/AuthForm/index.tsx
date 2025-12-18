@@ -39,17 +39,17 @@ const AuthForm = ({ setAuthTabValue }: AuthTabInterface) => {
           error={formik.touched.email && Boolean(formik.errors.email)}
           sx={{ mb: 2 }}
         >
-          <label htmlFor='email-input'>Email</label>
+          <label htmlFor='email'>Email</label>
           <Input
-            id='email-input'
+            id='email'
             name='email'
             type='email'
+            autoComplete='email'
             placeholder='juandelacruz@example.com'
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             fullWidth
-            autoComplete='email'
           />
           {formik.touched.email && formik.errors.email && (
             <FormHelperText>{formik.errors.email}</FormHelperText>
@@ -62,7 +62,7 @@ const AuthForm = ({ setAuthTabValue }: AuthTabInterface) => {
           error={formik.touched.password && Boolean(formik.errors.password)}
           sx={{ mb: 2 }}
         >
-          <label htmlFor='password-input'>
+          <label htmlFor='password'>
             Password
             <a
               href='#'
@@ -70,26 +70,20 @@ const AuthForm = ({ setAuthTabValue }: AuthTabInterface) => {
                 e.preventDefault();
                 console.log('Forgot password clicked');
               }}
-              style={{
-                fontSize: '0.75rem',
-                marginLeft: '8px',
-                color: '#1976d2',
-                textDecoration: 'none',
-              }}
             >
               Forgot password?
             </a>
           </label>
           <Input
-            id='password-input'
+            id='password'
             name='password'
             type='password'
             placeholder='*******'
+            autoComplete='password'
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             fullWidth
-            autoComplete='current-password'
           />
           {formik.touched.password && formik.errors.password && (
             <FormHelperText>{formik.errors.password}</FormHelperText>
@@ -103,7 +97,6 @@ const AuthForm = ({ setAuthTabValue }: AuthTabInterface) => {
                 name='keepSignedIn'
                 checked={formik.values.keepSignedIn}
                 onChange={formik.handleChange}
-                color='primary'
               />
             }
             label='Keep me signed in on this device.'
@@ -113,9 +106,9 @@ const AuthForm = ({ setAuthTabValue }: AuthTabInterface) => {
         <Button
           type='submit'
           variant='contained'
-          fullWidth
           className='auth-submit-button'
           disabled={formik.isSubmitting}
+          fullWidth
         >
           {formik.isSubmitting ? 'Logging in...' : 'Log in to JobFlow'}
         </Button>
