@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Autocomplete,
   Box,
@@ -10,8 +10,13 @@ import {
   Grid,
   Input,
   TextField,
+  FormHelperText,
 } from '@mui/material';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import AuthNote from '../AuthNote';
+import { signupSchema } from 'schemas/auth.schemas';
+import { AuthTabInterface } from 'interfaces/action.interfaces';
 
 const options = [
   {
@@ -33,89 +38,179 @@ const options = [
   },
 ];
 
-const SignupForm = () => {
-  const [selectedValue, setSelectedValue] = useState('');
+const SignupForm = ({ setAuthTabValue }: AuthTabInterface) => {
+  const formik = useFormik({
+    initialValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      jobSearchFocus: null as { label: string; value: string } | null,
+      sendTips: true,
+    },
+    validationSchema: signupSchema,
+    onSubmit: (values) => {
+      // Handle form submission
+      console.log('Form values:', values);
+      const submitData = {
+        ...values,
+        jobSearchFocus: values.jobSearchFocus?.value || '',
+      };
 
-  const handleChange = (
-    _event: React.SyntheticEvent,
-    value: { label: string; value: string } | null
-  ) => {
-    setSelectedValue(value ? value.value : '');
-  };
+      console.log('Submit data:', submitData);
 
-  const selectedOption =
-    options.find((option) => option.value === selectedValue) || null;
+      // Add API call here
+    },
+  });
+
   return (
-    <Box className='auth-form' mt={2}>
-      <FormControl variant='standard' fullWidth>
-        <label htmlFor='fname-input'>Fullname</label>
-        <Input id='fname-input' placeholder='Juan de la Cruz' />
-      </FormControl>
-
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={6}>
-          <FormControl variant='standard' fullWidth>
-            <label htmlFor='email-input'>Email</label>
-            <Input
-              id='email-input'
-              placeholder='juandelacruz@example.com'
-              fullWidth
-            />
-          </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormControl variant='standard' fullWidth>
-            <label htmlFor='password-input'>
-              Password
-              <span>+8 characters</span>
-            </label>
-            <Input
-              type='password'
-              id='password-input'
-              placeholder='*******'
-              fullWidth
-            />
-          </FormControl>
-        </Grid>
-      </Grid>
-
-      <FormControl variant='standard' fullWidth>
-        <Autocomplete
-          id='job-search-focus-autocomplete'
-          options={options}
-          getOptionLabel={(option) => option.label}
-          value={selectedOption}
-          onChange={handleChange}
-          isOptionEqualToValue={(option, value) =>
-            option.value === value?.value
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant='standard'
-              label='Job search focus'
-              placeholder='e.g. Product Manager in Berlin, remote friendly'
-            />
+    <form onSubmit={formik.handleSubmit} noValidate>
+      <Box className='auth-form' mt={2}>
+        <FormControl
+          variant='standard'
+          fullWidth
+          error={formik.touched.fullName && Boolean(formik.errors.fullName)}
+        >
+          <label htmlFor='fullName'>Fullname</label>
+          <Input
+            id='fullName'
+            name='fullName'
+            placeholder='Juan de la Cruz'
+            value={formik.values.fullName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            fullWidth
+          />
+          {formik.touched.fullName && formik.errors.fullName && (
+            <FormHelperText>{formik.errors.fullName}</FormHelperText>
           )}
-        />
-      </FormControl>
+        </FormControl>
 
-      <FormGroup className='auth-checkbox-label'>
-        <FormControlLabel
-          control={<Checkbox defaultChecked={true} />}
-          label='Send me occasional tips on JobFlow and job searching updates.'
-        />
-      </FormGroup>
-      <Button variant='contained' fullWidth className='auth-submit-button'>
-        Sign up to JobFlow
-      </Button>
+        <Grid container spacing={2} sx={{ mt: 0 }}>
+          <Grid item xs={12} sm={6}>
+            <FormControl
+              variant='standard'
+              fullWidth
+              error={formik.touched.email && Boolean(formik.errors.email)}
+            >
+              <label htmlFor='email'>Email</label>
+              <Input
+                id='email'
+                name='email'
+                type='email'
+                placeholder='juandelacruz@example.com'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                autoComplete='email'
+                fullWidth
+              />
+              {formik.touched.email && formik.errors.email && (
+                <FormHelperText>{formik.errors.email}</FormHelperText>
+              )}
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={6}>
+            <FormControl
+              variant='standard'
+              fullWidth
+              error={formik.touched.password && Boolean(formik.errors.password)}
+            >
+              <label htmlFor='password'>
+                Password
+                <span>+8 characters</span>
+              </label>
+              <Input
+                type='password'
+                id='password'
+                name='password'
+                placeholder='*******'
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                autoComplete='password'
+                fullWidth
+              />
+              {formik.touched.password && formik.errors.password && (
+                <FormHelperText>{formik.errors.password}</FormHelperText>
+              )}
+            </FormControl>
+          </Grid>
+        </Grid>
 
-      <AuthNote
-        note='Already have an account?'
-        link='#'
-        linkLabel='Log in here'
-      />
-    </Box>
+        <FormControl
+          variant='standard'
+          fullWidth
+          sx={{ mt: 2 }}
+          error={
+            formik.touched.jobSearchFocus &&
+            Boolean(formik.errors.jobSearchFocus)
+          }
+        >
+          <Autocomplete
+            id='jobSearchFocus'
+            options={options}
+            getOptionLabel={(option) => option.label}
+            value={formik.values.jobSearchFocus}
+            onChange={(_, value) => {
+              formik.setFieldValue('jobSearchFocus', value);
+            }}
+            onBlur={() => formik.setFieldTouched('jobSearchFocus', true)}
+            isOptionEqualToValue={(option, value) =>
+              option.value === value?.value
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='standard'
+                label='Job search focus'
+                placeholder='e.g. Product Manager in Berlin, remote friendly'
+                InputLabelProps={{
+                  ...params.InputLabelProps,
+                  shrink: true,
+                }}
+                error={
+                  formik.touched.jobSearchFocus &&
+                  Boolean(formik.errors.jobSearchFocus)
+                }
+                helperText={
+                  formik.touched.jobSearchFocus && formik.errors.jobSearchFocus
+                }
+              />
+            )}
+          />
+        </FormControl>
+
+        <FormGroup className='auth-checkbox-label' sx={{ mt: 2 }}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name='sendTips'
+                checked={formik.values.sendTips}
+                onChange={formik.handleChange}
+              />
+            }
+            label='Send me occasional tips on JobFlow and job searching updates.'
+          />
+        </FormGroup>
+
+        <Button
+          type='submit'
+          variant='contained'
+          fullWidth
+          className='auth-submit-button'
+          sx={{ mt: 2 }}
+          disabled={formik.isSubmitting}
+        >
+          {formik.isSubmitting ? 'Signing up...' : 'Sign up to JobFlow'}
+        </Button>
+
+        <AuthNote
+          note='Already have an account?'
+          linkLabel='Log in here'
+          setAuthTabValue={setAuthTabValue}
+        />
+      </Box>
+    </form>
   );
 };
 

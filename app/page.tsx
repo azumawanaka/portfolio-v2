@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { Box, Container, Tab, Tabs } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -19,9 +19,16 @@ import SignupCard from '@/components/auth-portal/SignupCard';
 export default function AuthPortal() {
   const [authTabValue, setAuthTabValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setAuthTabValue(newValue);
-  };
+  const handleChange = useCallback(
+    (event: React.SyntheticEvent, newValue: number) => {
+      setAuthTabValue(newValue);
+    },
+    []
+  );
+
+  const toggleTab = useCallback(() => {
+    setAuthTabValue((prev) => (prev === 0 ? 1 : 0));
+  }, []);
 
   return (
     <Box
@@ -37,10 +44,12 @@ export default function AuthPortal() {
           <Grid container spacing={2} className='auth-shell-grid'>
             <Grid item xs={12} md={6} lg={6}>
               <Item>
-                <AuthHeader />
-                <AuthHeroText />
-                <AuthHighLights />
-                <AuthMetrics />
+                <Box className='auth-hero-section'>
+                  <AuthHeader />
+                  <AuthHeroText />
+                  <AuthHighLights />
+                  <AuthMetrics />
+                </Box>
                 <AuthFooterNote />
               </Item>
             </Grid>
@@ -55,8 +64,12 @@ export default function AuthPortal() {
                   <Tab label='Sign up' />
                 </Tabs>
 
-                {authTabValue === 0 && <LoginCard />}
-                {authTabValue === 1 && <SignupCard />}
+                {authTabValue === 0 && (
+                  <LoginCard setAuthTabValue={toggleTab} />
+                )}
+                {authTabValue === 1 && (
+                  <SignupCard setAuthTabValue={toggleTab} />
+                )}
               </Item>
             </Grid>
           </Grid>

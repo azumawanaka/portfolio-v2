@@ -1,7 +1,5 @@
-import { borderRadius, fontWeight } from '@mui/system';
 import { Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { text } from 'stream/consumers';
 
 export const AuthShell = styled(Paper)(({ theme }) => ({
   display: 'flex',
@@ -65,6 +63,9 @@ export const AuthShell = styled(Paper)(({ theme }) => ({
       justifyContent: 'space-between',
       fontSize: 12,
       color: theme.custom.color.foreground,
+      '&#job-search-focus-autocomplete-label': {
+        fontSize: 15,
+      },
       '& a': {
         color: theme.custom.color.primary,
         textDecoration: 'none',
@@ -138,4 +139,7 @@ export const Item = styled(Paper)(({ theme }) => ({
   border: 'none',
   boxShadow: 'none',
   height: '100%',
+  '& .auth-hero-section': {
+    height: 'calc(100% - 50px)',
+  },
 }));
