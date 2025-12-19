@@ -12,10 +12,14 @@ export const AuthSocialButtons = styled(Typography)(({ theme }) => ({
     border: 'none',
     color: theme.custom.color.secondaryForeground,
     backgroundColor: theme.custom.color.secondary,
-    borderRadius: Number(theme.shape.borderRadius),
+    borderRadius: theme.shape.borderRadius,
     fontSize: 13,
     fontWeight: 500,
     padding: '8px 10px',
+    '&:hover': {
+      border: 'none',
+      boxShadow: '0 1px 3px rgba(15, 23, 42, 0.08)',
+    },
   },
 }));
 

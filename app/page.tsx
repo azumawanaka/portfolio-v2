@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { Box, Container, Tab, Tabs } from '@mui/material';
 import Grid from '@mui/material/Grid';
@@ -12,9 +12,9 @@ import {
   AuthMetrics,
   AuthHeroText,
   AuthFooterNote,
+  LoginCard,
+  SignupCard,
 } from '@/components/auth-portal';
-import LoginCard from '@/components/auth-portal/LoginCard';
-import SignupCard from '@/components/auth-portal/SignupCard';
 
 export default function AuthPortal() {
   const [authTabValue, setAuthTabValue] = useState(0);
@@ -41,7 +41,7 @@ export default function AuthPortal() {
     >
       <Container maxWidth='md' disableGutters>
         <AuthShell>
-          <Grid container spacing={2} className='auth-shell-grid'>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={6} lg={6}>
               <Item>
                 <Box className='auth-hero-section'>
