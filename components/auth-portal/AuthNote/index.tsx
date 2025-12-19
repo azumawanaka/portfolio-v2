@@ -1,5 +1,5 @@
-import { Box } from '@mui/material';
 import { AuthTabInterface } from 'interfaces/action.interfaces';
+import { StyledAuthNote } from './style';
 
 interface AuthNoteProps {
   note?: string;
@@ -16,17 +16,12 @@ const AuthNote = (props: AuthNoteProps) => {
   };
 
   return (
-    <Box
-      display='flex'
-      justifyContent='space-between'
-      mt={2}
-      className='auth-sign-up-note'
-    >
+    <StyledAuthNote>
       {note || "Don't have an account yet?"}
       <a href='#' onClick={toggleTab}>
         {linkLabel || 'Sign up here'}
       </a>
-    </Box>
+    </StyledAuthNote>
   );
 };
 

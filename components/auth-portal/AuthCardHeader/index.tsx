@@ -1,23 +1,21 @@
-import { Typography } from '@mui/material';
 import { ReactNode } from 'react';
+import { AuthFormSubTitle, AuthFormTitle } from './style';
 
 const AuthCardHeader = (props: { title?: string; subtitle?: ReactNode }) => {
   const { title, subtitle } = props || {};
 
   return (
     <>
-      <Typography variant='h6' className='auth-form-title'>
-        {title || 'Welcome back, Fil'}
-      </Typography>
+      <AuthFormTitle>{title || 'Welcome back, Fil'}</AuthFormTitle>
 
-      <Typography variant='body2' className='auth-form-subtitle'>
+      <AuthFormSubTitle>
         {subtitle || (
           <>
             Log in to continue as <strong>Filjumar Jumamoy</strong> or switch
             account below.
           </>
         )}
-      </Typography>
+      </AuthFormSubTitle>
     </>
   );
 };

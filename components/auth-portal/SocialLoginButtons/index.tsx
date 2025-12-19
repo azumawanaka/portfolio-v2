@@ -1,23 +1,18 @@
 import { Facebook, Google } from '@mui/icons-material';
-import { Box, Button, Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import { AuthSocialButtons } from './style';
 
 const LoginCard = () => {
   return (
     <>
-      <Box
-        mt={3}
-        display='flex'
-        flexDirection='column'
-        gap={1}
-        className='auth-social-buttons'
-      >
+      <AuthSocialButtons>
         <Button variant='outlined' startIcon={<Google />}>
           Continue with Google
         </Button>
         <Button variant='outlined' startIcon={<Facebook />}>
           Continue with Facebook
         </Button>
-      </Box>
+      </AuthSocialButtons>
 
       <Typography variant='body2' mt={3}>
         or use your email

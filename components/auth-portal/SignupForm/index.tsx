@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Autocomplete,
   Box,
@@ -13,10 +12,12 @@ import {
   FormHelperText,
 } from '@mui/material';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+
+import { AuthTabInterface } from '@/interfaces/action.interfaces';
+import { signupSchema } from '@/schemas/auth.schemas';
+
+import { StyledAuthForm } from '../AuthForm/style';
 import AuthNote from '../AuthNote';
-import { signupSchema } from 'schemas/auth.schemas';
-import { AuthTabInterface } from 'interfaces/action.interfaces';
 
 const options = [
   {
@@ -63,8 +64,8 @@ const SignupForm = ({ setAuthTabValue }: AuthTabInterface) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} noValidate>
-      <Box className='auth-form' mt={2}>
+    <StyledAuthForm onSubmit={formik.handleSubmit} noValidate>
+      <Box mt={2}>
         <FormControl
           variant='standard'
           fullWidth
@@ -199,7 +200,7 @@ const SignupForm = ({ setAuthTabValue }: AuthTabInterface) => {
           fullWidth
           className='auth-submit-button'
           sx={{ mt: 2 }}
-          disabled={formik.isSubmitting}
+          disabled={!formik.isValid || formik.isSubmitting}
         >
           {formik.isSubmitting ? 'Signing up...' : 'Sign up to JobFlow'}
         </Button>
@@ -210,7 +211,7 @@ const SignupForm = ({ setAuthTabValue }: AuthTabInterface) => {
           setAuthTabValue={setAuthTabValue}
         />
       </Box>
-    </form>
+    </StyledAuthForm>
   );
 };
 
