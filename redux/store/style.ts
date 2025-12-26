@@ -8,5 +8,6 @@ export const LayoutWrapper = styled(Box, {
     display: 'flex',
     gap: 24,
     justifyContent: 'flex-start',
+    padding: theme.spacing(2, 1),
   }),
 }));

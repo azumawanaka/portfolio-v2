@@ -1,15 +1,15 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import CustomDrawer from './components/Drawer';
 import { shouldShowSidebar } from '@/config/site.config';
+import Drawer from './components/Drawer';
 
 const Sidebar = () => {
   const pathname = usePathname();
 
   if (!shouldShowSidebar(pathname)) return null;
 
-  return <CustomDrawer />;
+  return <Drawer />;
 };
 
 export default Sidebar;

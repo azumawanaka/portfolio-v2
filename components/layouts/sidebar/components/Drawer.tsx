@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, List, ListItem, ListItemButton } from '@mui/material';
+import { Box, List, ListItem, ListItemButton, Typography } from '@mui/material';
 import { useState } from 'react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -8,8 +8,9 @@ import ListItemText from '@mui/material/ListItemText';
 import { MAIN_NAVIGATION } from '@/config/site.config';
 import Link from 'next/link';
 import { SyledAside } from './style';
+import SideBarLogo from './SideBarLogo';
 
-const CustomDrawer = () => {
+const Drawer = () => {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -18,9 +19,10 @@ const CustomDrawer = () => {
 
   return (
     <SyledAside role='presentation' onClick={toggleDrawer(false)}>
-      <List>
+      <SideBarLogo />
+      <List className='sidebar-nav-list'>
         {MAIN_NAVIGATION.map((item) => (
-          <ListItem key={item.href} disablePadding>
+          <ListItem key={item.href} disablePadding className='sidebar-nav-item'>
             <ListItemButton component={Link} href={item.href || '/'}>
               <ListItemIcon>
                 <InboxIcon />
@@ -34,4 +36,4 @@ const CustomDrawer = () => {
   );
 };
 
-export default CustomDrawer;
+export default Drawer;
