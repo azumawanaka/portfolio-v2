@@ -9,6 +9,10 @@ export const StyledHeader = styled.header(({ theme }) => ({
   gap: 10,
   marginBottom: 20,
   padding: theme.spacing(0, 2),
+  marginLeft: 'auto',
+  [theme.breakpoints.up('md')]: {
+    maxWidth: 600,
+  },
   '& .header-center': {
     flex: 1,
     '& .header-search': {
