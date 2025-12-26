@@ -1,9 +1,10 @@
-import { borderRadius } from '@mui/system';
 import styled from '@emotion/styled';
 
 export const SyledAside = styled.aside(({ theme }) => ({
   width: 220,
-  padding: theme.spacing(1, 2),
+  padding: theme.spacing(5, 2),
+  minHeight: 'calc(100dvh - 38px)',
+  background: theme.custom.color.card,
   '& .sidebar-logo': {
     display: 'flex',
     alignItems: 'center',

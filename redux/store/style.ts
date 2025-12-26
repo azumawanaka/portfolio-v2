@@ -6,8 +6,11 @@ export const LayoutWrapper = styled(Box, {
 })<{ hasSidebar?: boolean }>(({ theme, hasSidebar }) => ({
   ...(hasSidebar && {
     display: 'flex',
-    gap: 24,
     justifyContent: 'flex-start',
-    padding: theme.spacing(2, 1),
+    gap: 24,
+    '& main': {
+      flex: 1,
+      padding: theme.spacing(4, 2),
+    },
   }),
 }));

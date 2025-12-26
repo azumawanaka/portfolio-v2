@@ -8,6 +8,7 @@ import Sidebar from '@/components/layouts/sidebar';
 import { LayoutWrapper } from './style';
 import { usePathname } from 'next/navigation';
 import { shouldShowSidebar } from '@/config/site.config';
+import Header from '@/components/layouts/header';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -19,7 +20,10 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <CssBaseline />
         <LayoutWrapper hasSidebar={showSidebar}>
           <Sidebar />
-          <main>{children}</main>
+          <main>
+            <Header />
+            {children}
+          </main>
         </LayoutWrapper>
       </ThemeProvider>
     </Provider>
