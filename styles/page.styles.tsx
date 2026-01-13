@@ -1,4 +1,4 @@
-import { styled, Box, Button, IconButton } from '@mui/material';
+import { styled, Box, Button, IconButton, Tab, keyframes } from '@mui/material';
 
 export const OuterContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
@@ -90,7 +90,7 @@ export const PageRight = styled(Box)(({ theme }) => ({
   background: 'var(--card)',
   display: 'flex',
   flexDirection: 'column',
-  padding: '56px 64px',
+  padding: '32px 34px',
   position: 'relative',
   zIndex: 1,
 
@@ -104,8 +104,12 @@ export const PageRight = styled(Box)(({ theme }) => ({
   },
 
   [theme.breakpoints.down('sm')]: {
-    padding: '32px 16px',
+    padding: 0,
     minHeight: '98dvh',
+  },
+
+  '& .content-container': {
+    minHeight: '540px',
   },
 }));
 
@@ -284,7 +288,6 @@ export const DownloadButton = styled(Button)(({ theme }) => ({
 export const TopNav = styled('nav')(({ theme }) => ({
   display: 'flex',
   gap: '8px',
-  marginBottom: '48px',
   borderBottom: '1px solid var(--border)',
   paddingBottom: '1px',
 
@@ -306,10 +309,11 @@ export const TopNav = styled('nav')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     gap: '4px',
     marginBottom: '20px',
+    overflowX: 'auto',
   },
 }));
 
-export const NavTab = styled('div', {
+export const NavTab = styled(Tab, {
   shouldForwardProp: (prop) => prop !== 'active',
 })<{ active?: boolean }>(({ theme, active }) => ({
   padding: '12px 20px',
@@ -481,4 +485,34 @@ export const ArrowButton = styled(IconButton, {
     width: '36px',
     height: '36px',
   },
+}));
+
+export const CategoryTitle = styled('div')(({ theme }) => ({
+  fontSize: '14px',
+  textTransform: 'uppercase',
+  letterSpacing: '0.5px',
+  color: 'var(--primary)',
+  fontWeight: 700,
+  marginBottom: '16px',
+  borderBottom: '1px solid var(--muted)',
+  paddingBottom: '8px',
+}));
+
+export const SkillsList = styled('div')(({ theme }) => ({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
+  gap: '12px',
+}));
+
+export const SkillCard = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  padding: '10px 12px',
+  background: 'var(--sidebar)',
+  border: '1px solid var(--border)',
+  borderRadius: 'var(--radius-sm)',
+  fontSize: '13px',
+  color: 'var(--secondary-foreground)',
+  fontWeight: 500,
 }));

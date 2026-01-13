@@ -1,6 +1,6 @@
 'use client';
 
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 
 import {
   MainStage,
@@ -14,8 +14,17 @@ import AboutMe from '@/components/pages/AboutMe';
 import TabNavigation from '@/components/layouts/TabNavigations';
 import FooterPageIndicator from '@/components/layouts/FooterPageIndicator';
 import ProfileSideBar from '@/components/layouts/ProfileSideBar';
+import TechnicalProficiency from '@/components/pages/Skills';
+import { useState } from 'react';
+import TabPanel from '@/components/TabPanel';
 
 export default function Welcome() {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   return (
     <OuterContainer>
       <Container maxWidth='lg' disableGutters>
@@ -30,9 +39,17 @@ export default function Welcome() {
 
             {/* Right Page: Content */}
             <PageRight>
-              <TabNavigation />
-              <AboutMe />
-              <FooterPageIndicator />
+              <Box className='content-container'>
+                <TabNavigation handleChange={handleChange} value={value} />
+                <TabPanel value={value} index={0}>
+                  <AboutMe />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                  <TechnicalProficiency />
+                </TabPanel>
+              </Box>
+
+              <FooterPageIndicator value={value} setValue={setValue} />
             </PageRight>
           </BookSpread>
         </MainStage>

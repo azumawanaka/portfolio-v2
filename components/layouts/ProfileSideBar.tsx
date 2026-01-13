@@ -30,6 +30,7 @@ const ProfileSideBar = () => {
             borderRadius: '50%',
           }}
           unoptimized
+          loading='eager'
         />
       </AvatarLarge>
       <DevName>Filjumar</DevName>
