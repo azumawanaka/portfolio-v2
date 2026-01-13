@@ -239,7 +239,7 @@ export const ContactRow = styled(Box)(({ theme }) => ({
 
 export const DownloadButton = styled(Button)(({ theme }) => ({
   background: 'var(--foreground)',
-  color: 'var(--primary-foreground)',
+  color: 'var(--primary)',
   border: 'none',
   padding: '14px 28px',
   borderRadius: '50px',

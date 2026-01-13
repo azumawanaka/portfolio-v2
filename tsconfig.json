@@ -24,7 +24,8 @@
       "@/lib/*": ["lib/*"],
       "@/types/*": ["types/*"],
       "@/styles/*": ["styles/*"],
-      "@/constants/*": ["constants/*"]
+      "@/constants/*": ["constants/*"],
+      "@/utils/*": ["utils/*"]
     }
   },
   "include": [

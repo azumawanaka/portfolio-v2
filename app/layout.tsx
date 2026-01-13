@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 
 import './globals.css';
 import ThemeRegistry from '@/lib/mui/theme-registry';
+import ParticlesBackground from '@/components/ParticlesBackground';
 
 export const metadata = {
   title: 'Filjumar - Fullstack Web Developer',
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang='en' className={inter.variable}>
       <body suppressHydrationWarning>
         <ThemeRegistry>
+          <ParticlesBackground />
           <Suspense fallback={<RouteProgress />}>
             <RouteProgress />
             {children}

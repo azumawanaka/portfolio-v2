@@ -2,26 +2,34 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #d6d3ce;
-  --foreground: #2c241b;
-  --primary: #8b4513;
+  /* Base Colors */
+  --background: #18181b;
+  --foreground: #fafafa;
+
+  /* Primary - Blue Gray */
+  --primary: #64748b;
   --primary-foreground: #ffffff;
-  --secondary: #e6e2dd;
-  --secondary-foreground: #4a3b32;
-  --muted: #f0ebe5;
-  --muted-foreground: #786c61;
-  --accent: #a0522d;
+
+  /* Secondary - Dark Gray */
+  --secondary: #27272a;
+  --secondary-foreground: #e4e4e7;
+
+  /* Accents */
+  --muted: #3f3f46;
+  --muted-foreground: #a1a1aa;
+  --accent: #0ea5e9;
   --accent-foreground: #ffffff;
-  --border: #c9c0b1;
-  --card: #fdfbf7;
-  --card-foreground: #1a1612;
-  --sidebar: #f5f2eb;
-  --sidebar-foreground: #3e3226;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 24px;
-  --font-family-body: system-ui, -apple-system, sans-serif;
+
+  /* UI Elements */
+  --border: #52525b;
+  --card: #27272a;
+  --card-foreground: #fafafa;
+  --sidebar: #18181b;
+  --sidebar-foreground: #d4d4d8;
+
+  /* Professional */
+  --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
 /* Responsive book dimensions */
