@@ -20,25 +20,10 @@ export function middleware(request: NextRequest) {
   const redirectMap: Record<string, string> = {
     '/home': '/',
     '/index': '/',
-    '/old-blog': '/blog',
   };
 
   if (redirectMap[pathname]) {
     return NextResponse.redirect(new URL(redirectMap[pathname], request.url));
-  }
-
-  // ===== AUTH PROTECTION =====
-  // const protectedPaths = ['/admin', '/dashboard', '/settings'];
-  const protectedPaths = ['/admin', '/settings'];
-  const isProtectedPath = protectedPaths.some((path) =>
-    pathname.startsWith(path)
-  );
-
-  if (isProtectedPath) {
-    const hasAuth = request.cookies.get('session')?.value;
-    if (!hasAuth) {
-      return NextResponse.redirect(new URL('/', request.url));
-    }
   }
 
   return response;

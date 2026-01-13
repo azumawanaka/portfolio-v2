@@ -21,14 +21,8 @@
     ],
     "paths": {
       "@/components/*": ["components/*"],
-      "@/config/*": ["config/*"],
-      "@/hooks/*": ["hooks/*"],
       "@/lib/*": ["lib/*"],
-      "@/redux/*": ["redux/*"],
-      "@/services/*": ["services/*"],
-      "@/types/*": ["types/*"],
-      "@/interfaces/*": ["interfaces/*"],
-      "@/schemas/*": ["schemas/*"]
+      "@/types/*": ["types/*"]
     }
   },
   "include": [

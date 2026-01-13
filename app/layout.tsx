@@ -10,7 +10,7 @@ import ThemeRegistry from '@/lib/mui/theme-registry';
 
 export const metadata = {
   title: 'JobFlow',
-  description: 'Make your job searching easier with JobFlow.',
+  description: '',
 };
 
 const inter = Inter({
