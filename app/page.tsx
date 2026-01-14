@@ -40,7 +40,7 @@ export default function Welcome() {
   return (
     <OuterContainer>
       <OptimizedParticlesBackground />
-      <Container maxWidth='lg' disableGutters>
+      <Container maxWidth='xl' disableGutters>
         <MainStage>
           <BookSpread>
             <PageLeft>

@@ -1,15 +1,26 @@
 'use client';
 
-import { ChapterContent } from '@/styles/page.styles';
+import { ChapterContent, ProjectsContainer } from '@/styles/page.styles';
 import HeaderTitle from '../shared/HeaderTitle';
 import UnderConstruction from '../UnderConstruction';
+import { Project } from '@/types/project.types';
+import ProjectCard from '../ProjectCard';
+import { SelectedProjects } from '@/constants/projects.constants';
 
-const Projects = () => {
+interface SelectedWorksProps {
+  projects?: Project[];
+}
+
+const Projects: React.FC<SelectedWorksProps> = () => {
   return (
     <ChapterContent>
       <HeaderTitle title='Selected Works' page='03' />
 
-      <UnderConstruction />
+      <ProjectsContainer>
+        {SelectedProjects.map((project) => (
+          <ProjectCard key={project.id} project={project} />
+        ))}
+      </ProjectsContainer>
     </ChapterContent>
   );
 };

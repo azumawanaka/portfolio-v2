@@ -1,31 +1,32 @@
 /* global.css */
 @import 'tailwindcss';
 
+/* Warm Earth Tones */
 :root {
   /* Base Colors */
-  --background: #2d2424;
-  --foreground: #f5e8da;
+  --background: #1c1917;
+  --foreground: #fafaf9;
 
-  /* Primary - Terracotta */
-  --primary: #b85c38;
-  --primary-foreground: #ffffff;
+  /* Primary - Amber */
+  --primary: #d97706;
+  --primary-foreground: #0c0a09;
 
   /* Secondary - Warm Brown */
-  --secondary: #5c3d2e;
-  --secondary-foreground: #f5e8da;
+  --secondary: #292524;
+  --secondary-foreground: #e7e5e4;
 
   /* Accents */
-  --muted: #7d5a50;
-  --muted-foreground: #d4b5a0;
-  --accent: #e0c097;
-  --accent-foreground: #2d2424;
+  --muted: #44403c;
+  --muted-foreground: #a8a29e;
+  --accent: #ea580c;
+  --accent-foreground: #ffffff;
 
   /* UI Elements */
-  --border: #a07178;
-  --card: #5c3d2e;
-  --card-foreground: #f5e8da;
-  --sidebar: #2d2424;
-  --sidebar-foreground: #e6d2c3;
+  --border: #57534e;
+  --card: #292524;
+  --card-foreground: #fafaf9;
+  --sidebar: #1c1917;
+  --sidebar-foreground: #d6d3d1;
 
   /* Professional */
   --shadow-subtle: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -34,7 +35,7 @@
 
 /* Responsive book dimensions */
 :root {
-  --book-width: 1300px;
+  --book-width: 1200px;
   --book-height: 700px;
 }
 
@@ -79,8 +80,4 @@ body {
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-#tsparticles {
-  position: absolute;
 }

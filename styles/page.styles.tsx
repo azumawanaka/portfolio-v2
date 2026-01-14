@@ -5,7 +5,9 @@ import {
   IconButton,
   Tab,
   Typography,
+  Link,
 } from '@mui/material';
+import ArrowOutward from '@mui/icons-material/ArrowOutward';
 import ConstructionIcon from '@mui/icons-material/Construction';
 
 export const OuterContainer = styled(Box)(({ theme }) => ({
@@ -34,7 +36,7 @@ export const MainStage = styled(Box)(({ theme }) => ({
 }));
 
 export const BookSpread = styled(Box)(({ theme }) => ({
-  width: 'var(--book-width, 1200px)',
+  width: 'var(--book-width, 1400px)',
   height: 'var(--book-height, 700px)',
   background: 'var(--card)',
   borderRadius: 'var(--radius-sm)',
@@ -117,7 +119,7 @@ export const PageRight = styled(Box)(({ theme }) => ({
   },
 
   '& .content-container': {
-    minHeight: '540px',
+    minHeight: 'calc(100% - 100px)',
 
     '& .tab-panel-content': {
       padding: '24px 0',
@@ -602,4 +604,115 @@ export const GradientText = styled(Typography)(({ theme }) => ({
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',
+
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+  },
+}));
+
+export const ProjectsContainer = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '32px',
+  maxHeight: '800px',
+  overflow: 'auto',
+}));
+
+export const ProjectEntry = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '24px',
+  borderBottom: `1px dashed ${theme.palette.divider}`,
+  padding: '10px 12px',
+  background: 'var(--sidebar)',
+  border: '1px solid var(--border)',
+  borderRadius: 'var(--radius-sm)',
+  fontSize: '13px',
+  color: 'var(--foreground)',
+  fontWeight: 500,
+  '&:last-child': {
+    borderBottom: 'none',
+  },
+}));
+
+export const ProjectThumb = styled(Box)(({ theme }) => ({
+  width: '120px',
+  height: '90px',
+  flexShrink: 0,
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: theme.palette.action.hover,
+  border: `1px solid ${theme.palette.divider}`,
+  overflow: 'hidden',
+  position: 'relative',
+  '& img': {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    filter: 'sepia(20%)',
+  },
+}));
+
+export const ProjectDetails = styled(Box)(({ theme }) => ({
+  flex: 1,
+  display: 'flex',
+  flexDirection: 'column',
+}));
+
+export const ProjectHeader = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'flex-start',
+  marginBottom: '8px',
+}));
+
+export const ProjectTitle = styled(Typography)(({ theme }) => ({
+  fontSize: '16px',
+  fontWeight: 700,
+  color: 'var(--sidebar-foreground)',
+}));
+
+export const ProjectLink = styled(Link)(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  color: 'var(--sidebar-foreground)',
+  fontSize: '12px',
+  fontWeight: 600,
+  textDecoration: 'none',
+  borderBottom: '1px solid transparent',
+  transition: 'border-color 0.2s ease',
+  '&:hover': {
+    textDecoration: 'none',
+  },
+}));
+
+export const ProjectDescription = styled(Typography)(({ theme }) => ({
+  fontSize: '13px',
+  lineHeight: 1.5,
+  color: 'var(--sidebar-foreground)',
+  marginBottom: '12px',
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+}));
+
+export const TechStack = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '6px',
+  marginTop: 'auto',
+}));
+
+export const TechTag = styled(Box)(({ theme }) => ({
+  fontSize: '11px',
+  padding: '4px 8px',
+  color: 'var(--sidebar-foreground)',
+  border: `1px solid var(--border)`,
+  borderRadius: 'var(--radius-sm)',
+  whiteSpace: 'nowrap',
+}));
+
+export const StyledArrowIcon = styled(ArrowOutward)(({ theme }) => ({
+  fontSize: '12px',
 }));
