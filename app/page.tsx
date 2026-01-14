@@ -21,6 +21,14 @@ import { AnimatePresence } from 'framer-motion';
 import AnimatedTab from '@/components/AnimatedTab';
 import UnderConstruction from '@/components/UnderConstruction';
 import Projects from '@/components/pages/Projects';
+import dynamic from 'next/dynamic';
+
+const OptimizedParticlesBackground = dynamic(
+  () => import('@/components/ParticlesBackground'),
+  {
+    loading: () => null,
+  }
+);
 
 export default function Welcome() {
   const [value, setValue] = useState(0);
@@ -31,6 +39,7 @@ export default function Welcome() {
 
   return (
     <OuterContainer>
+      <OptimizedParticlesBackground />
       <Container maxWidth='lg' disableGutters>
         <MainStage>
           <BookSpread>

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Tabs from '@mui/material/Tabs';
 import { NavTab, TopNav } from '@/styles/page.styles';
-import { useTheme } from '@emotion/react';
-import { useMediaQuery } from '@mui/material';
+import { useTheme, useMediaQuery } from '@mui/material';
 import { NavigationTabs } from '@/constants/navigation-tabs.constants';
 
 interface TabNavigationsProps {
@@ -29,7 +28,11 @@ const TabNavigations = (props: TabNavigationsProps) => {
           <NavTab
             key={index}
             label={tab.label}
+            id={`tab-${index}`}
             aria-controls={`tabpanel-${index}`}
+            aria-selected={value === index}
+            role='tab'
+            tabIndex={value === index ? 0 : -1}
           />
         ))}
       </Tabs>

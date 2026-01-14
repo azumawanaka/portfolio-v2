@@ -8,7 +8,6 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import LayersIcon from '@mui/icons-material/Layers';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import DesktopWindowsIcon from '@mui/icons-material/DesktopWindows';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 export const SkillsData = [
   {
@@ -16,30 +15,24 @@ export const SkillsData = [
     skills: [
       {
         icon: <ScienceIcon sx={{ fontSize: 16 }} />,
-        name: 'React.js / Next.js',
+        name: 'JS / JQuery / React.js / Next.js',
       },
       { icon: <CodeIcon sx={{ fontSize: 16 }} />, name: 'TypeScript' },
-      { icon: <PaletteIcon sx={{ fontSize: 16 }} />, name: 'Tailwind CSS' },
+      { icon: <PaletteIcon sx={{ fontSize: 16 }} />, name: 'Bootstrap / MUi' },
       { icon: <DashboardIcon sx={{ fontSize: 16 }} />, name: 'HTML5 / SCSS' },
     ],
   },
   {
     category: 'Backend & Database',
     skills: [
-      {
-        icon: <StorageIcon sx={{ fontSize: 16 }} />,
-        name: 'Node.js / Express',
-      },
-      { icon: <DataObjectIcon sx={{ fontSize: 16 }} />, name: 'PostgreSQL' },
+      { icon: <DataObjectIcon sx={{ fontSize: 16 }} />, name: 'MySQL' },
       { icon: <TerminalIcon sx={{ fontSize: 16 }} />, name: 'PHP / Laravel' },
-      { icon: <LayersIcon sx={{ fontSize: 16 }} />, name: 'Redis' },
     ],
   },
   {
     category: 'Tools & Deployment',
     skills: [
       { icon: <GitHubIcon sx={{ fontSize: 16 }} />, name: 'Git / GitHub' },
-      { icon: <DesktopWindowsIcon sx={{ fontSize: 16 }} />, name: 'Docker' },
     ],
   },
 ];

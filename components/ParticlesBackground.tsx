@@ -1,19 +1,61 @@
 'use client';
 
-import { useCallback } from 'react';
-import Particles from 'react-tsparticles';
-import { loadSlim } from 'tsparticles-slim';
-import type { Engine, Container } from 'tsparticles-engine';
+import { useCallback, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// Dynamically import particles with SSR disabled
+const Particles = dynamic(() => import('react-tsparticles'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const ParticlesBackground = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    // Check device type
+    const checkMobile = () => {
+      const userAgent = navigator.userAgent || navigator.vendor;
+      const mobileRegex =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+      setIsMobile(mobileRegex.test(userAgent));
+    };
+
+    // Check reduced motion preference
+    const checkReducedMotion = () => {
+      const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+      setReducedMotion(mediaQuery.matches);
+    };
+
+    checkMobile();
+    checkReducedMotion();
+
+    // Only enable particles after page load and if not mobile/reduced motion
+    if (!isMobile && !reducedMotion) {
+      const timer = setTimeout(() => {
+        setIsEnabled(true);
+      }, 1500); // Delay loading particles
+
+      return () => clearTimeout(timer);
+    }
+  }, [isMobile, reducedMotion]);
+
+  const particlesInit = useCallback(async (engine: any) => {
+    // Dynamically import the slim version
+    const { loadSlim } = await import('tsparticles-slim');
     await loadSlim(engine);
   }, []);
 
-  const particlesLoaded = useCallback(
-    async (container: Container | undefined) => {},
-    []
-  );
+  const particlesLoaded = useCallback(async () => {
+    // Optional callback
+  }, []);
+
+  // Don't render particles on mobile or if user prefers reduced motion
+  if (!isEnabled || isMobile || reducedMotion) {
+    return null;
+  }
 
   return (
     <Particles
@@ -26,26 +68,30 @@ const ParticlesBackground = () => {
             value: 'transparent',
           },
         },
-        fpsLimit: 120,
+        fpsLimit: 30, // CRITICAL: Reduced from 120 to 30
         interactivity: {
           events: {
             onClick: {
-              enable: true,
-              mode: 'push',
+              enable: false, // Disabled for performance
             },
             onHover: {
               enable: true,
-              mode: 'repulse',
+              mode: 'grab', // Lighter than repulse
+              parallax: {
+                enable: false, // Disabled for performance
+              },
             },
-            resize: true,
+            resize: {
+              enable: true,
+              delay: 500,
+            },
           },
           modes: {
-            push: {
-              quantity: 4,
-            },
-            repulse: {
-              distance: 100,
-              duration: 0.4,
+            grab: {
+              distance: 80,
+              links: {
+                opacity: 0.8,
+              },
             },
           },
         },
@@ -55,42 +101,70 @@ const ParticlesBackground = () => {
           },
           links: {
             color: '#ffffff',
-            distance: 150,
+            distance: 200, // Reduced
             enable: true,
-            opacity: 0.3,
-            width: 1,
+            opacity: 0.8, // Reduced
+            width: 1, // Reduced
+            triangles: {
+              enable: false, // Disabled for performance
+            },
           },
           collisions: {
-            enable: true,
+            enable: false, // Disabled for performance
           },
           move: {
             direction: 'none',
             enable: true,
             outModes: {
-              default: 'bounce',
+              default: 'out',
             },
-            random: false,
-            speed: 2,
+            random: true,
+            speed: 0.8, // Reduced from 2
             straight: false,
+            trail: {
+              enable: false, // Disabled for performance
+            },
           },
           number: {
             density: {
               enable: true,
-              area: 800,
+              area: 1000, // Increased area
             },
-            value: 60,
+            value: 20, // CRITICAL: Reduced from 60 to 20
           },
           opacity: {
-            value: 0.3,
+            value: 0.2, // Reduced
+            animation: {
+              enable: false, // Disabled for performance
+            },
           },
           shape: {
             type: 'circle',
           },
           size: {
-            value: { min: 1, max: 3 },
+            value: { min: 0.5, max: 2 }, // Smaller
+          },
+          reduceDuplicates: true,
+        },
+        detectRetina: false, // Disabled for performance
+        pauseOnOutsideViewport: true,
+        pauseOnBlur: true,
+        smooth: false,
+        motion: {
+          reduce: {
+            factor: 2,
+            value: true,
           },
         },
-        detectRetina: true,
+      }}
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        pointerEvents: 'none',
       }}
     />
   );
