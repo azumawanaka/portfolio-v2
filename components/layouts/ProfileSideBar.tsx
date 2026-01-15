@@ -46,7 +46,9 @@ const ProfileSideBar = () => {
       </ContactMini>
 
       <DownloadButton
-        data-media-type='banani-button'
+        component='a'
+        href='/Resume.pdf'
+        download
         startIcon={
           <Box className='download-icon'>
             <DownloadIcon />
